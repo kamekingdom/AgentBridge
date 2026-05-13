@@ -1,0 +1,8 @@
+name: lab-gpu-server
+host: 192.168.1.20
+user: agent-user
+project_root: /home/agent-user/project
+runtime:
+  package_manager: uv
+  test_command: pytest
+  build_command: npm run build

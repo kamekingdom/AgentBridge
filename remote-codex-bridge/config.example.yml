@@ -1,0 +1,5 @@
+host: "your-remote-host"
+port: 22
+user: "your-user"
+remote_root: "/home/your-user/project"
+local_root: "remote"
