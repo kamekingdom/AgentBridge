@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remote Codex Bridge Chat Console</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar__top">
+          <div>
+            <p class="sidebar__brand">Remote Codex Bridge</p>
+            <h1 class="sidebar__title">Projects</h1>
+          </div>
+          <button id="toggle-sidebar" class="icon-button" type="button" aria-label="sidebar toggle">◧</button>
+        </div>
+
+        <button id="new-project" class="sidebar__primary" type="button">+ 新しいプロジェクト</button>
+
+        <div class="sidebar__search">
+          <input id="project-search" type="text" placeholder="プロジェクトを検索">
+        </div>
+
+        <div class="sidebar__scroll">
+          <section class="sidebar__section sidebar__section--projects">
+            <div class="sidebar__section-head">
+              <span>プロジェクト</span>
+              <button id="copy-list-command" class="text-button" type="button">list</button>
+            </div>
+            <div id="project-list" class="project-list"></div>
+          </section>
+
+          <section class="sidebar__section sidebar__section--footer">
+            <div class="sidebar-card">
+              <p class="sidebar-card__eyebrow">Current Workspace</p>
+              <strong id="sidebar-workspace">projects/default</strong>
+              <span id="sidebar-remote-root">remote/</span>
+            </div>
+            <div class="sidebar-card">
+              <p class="sidebar-card__eyebrow">CLI</p>
+              <strong>`./scripts/ab.sh --project ...`</strong>
+              <span>左で案件を選び、右で対話しながらコマンドを組み立てます。</span>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <main class="chat-app">
+        <header class="chat-header">
+          <div>
+            <p class="chat-header__eyebrow">Active Project</p>
+            <h2 id="active-project-name">default</h2>
+          </div>
+          <div class="chat-header__actions">
+            <span id="server-status" class="status-pill">Connecting...</span>
+            <button id="copy-init-command" class="ghost-button" type="button">init</button>
+            <button id="copy-use-command" class="ghost-button" type="button">use</button>
+            <button id="toggle-settings" class="ghost-button" type="button">設定</button>
+          </div>
+        </header>
+
+        <section id="settings-panel" class="settings-panel is-hidden">
+          <div class="settings-panel__grid">
+            <label>
+              <span>Project Name</span>
+              <input id="project-name-input" type="text" placeholder="client-a">
+            </label>
+            <label>
+              <span>Host</span>
+              <input id="host-input" type="text" placeholder="your-remote-host">
+            </label>
+            <label>
+              <span>Port</span>
+              <input id="port-input" type="number" placeholder="22">
+            </label>
+            <label>
+              <span>User</span>
+              <input id="user-input" type="text" placeholder="your-user">
+            </label>
+            <label>
+              <span>Remote Root</span>
+              <input id="remote-root-input" type="text" placeholder="/home/your-user/project">
+            </label>
+            <label>
+              <span>Local Root</span>
+              <input id="local-root-input" type="text" placeholder="remote">
+            </label>
+          </div>
+
+          <div class="settings-panel__yaml">
+            <div class="settings-panel__yaml-head">
+              <strong>config.yml preview</strong>
+              <div class="button-row">
+                <button id="import-yaml" class="ghost-button" type="button">YAML反映</button>
+                <button id="save-project" class="solid-button" type="button">保存</button>
+              </div>
+            </div>
+            <textarea id="yaml-input" rows="6" spellcheck="false"></textarea>
+          </div>
+        </section>
+
+        <section class="chat-surface">
+          <div id="chat-thread" class="chat-thread"></div>
+
+          <div class="composer">
+            <div id="composer-box" class="composer__box">
+              <div id="drop-hint" class="drop-hint is-hidden">
+                ここにファイルをドロップしてチャットに添付
+              </div>
+              <div id="attachment-list" class="attachment-list"></div>
+              <input id="file-input" type="file" multiple hidden>
+              <textarea id="chat-input" rows="1" placeholder="このプロジェクトで何をしたいか入力してください"></textarea>
+              <div class="composer__actions">
+                <div class="composer__buttons">
+                  <button id="attach-file" class="attach-button" type="button">添付</button>
+                  <button id="send-message" class="send-button" type="button">↑</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="message-template">
+      <article class="message">
+        <div class="message__avatar"></div>
+        <div class="message__content">
+          <div class="message__role"></div>
+          <div class="message__body"></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

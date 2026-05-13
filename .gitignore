@@ -1,0 +1,6 @@
+.current_project
+projects/*/remote/*
+!projects/*/remote/.gitkeep
+projects/*/logs/*.log
+!projects/*/logs/.gitkeep
+.DS_Store

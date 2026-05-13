@@ -1,5 +1,0 @@
-remote/*
-!remote/.gitkeep
-
-logs/*.log
-!logs/.gitkeep
